@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f7f3" />
+    <meta name="description" content="점심시간과 예산에 맞는 메뉴를 빠르게 찾는 LunchFit" />
+    <title>LunchFit — 오늘 점심, 딱 맞게</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#home" aria-label="LunchFit 홈">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>lunch<span class="brand-fit">fit</span></span>
+        </a>
+        <div class="workspace-label">YOUR WORKSPACE</div>
+        <nav class="side-nav" aria-label="주 메뉴">
+          <a class="nav-item active" href="#home"><span class="nav-icon">⌂</span> 오늘의 점심</a>
+          <a class="nav-item" href="#group"><span class="nav-icon">♧</span> 함께 주문하기</a>
+          <a class="nav-item" href="#saved"><span class="nav-icon">♡</span> 저장한 메뉴</a>
+        </nav>
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-tip">
+          <div class="tip-icon">✳</div>
+          <div class="tip-title">점심시간을 아껴요</div>
+          <p>먹고 돌아오는 시간까지 계산해, 오늘 가능한 메뉴만 보여드려요.</p>
+        </div>
+        <button class="profile-button" type="button" aria-label="프로필">
+          <span class="avatar">김</span><span class="profile-copy"><strong>김민지</strong><small>내 점심 프로필</small></span><span class="profile-more">···</span>
+        </button>
+      </aside>
+
+      <main id="home" class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb"><span>LunchFit</span><span class="crumb-slash">/</span><strong>오늘의 점심</strong></div>
+          <div class="topbar-right"><span class="location"><span class="location-dot"></span> 데모 위치 · 역삼동</span><button class="icon-button" type="button" aria-label="알림">♧<i></i></button></div>
+        </header>
+
+        <section class="welcome-row">
+          <div><div class="eyebrow"><span class="sun-icon">☼</span> <span id="today-label">오늘</span> <span class="eyebrow-divider">·</span> 점심시간이에요</div><h1>오늘 점심,<br class="mobile-break" /> <span>딱 맞게</span> 골라볼까요?</h1><p class="welcome-subtitle">먹고 돌아오는 시간까지 생각한 메뉴를 찾아드릴게요.</p></div>
+          <div class="daily-stats"><div class="stats-icon">◷</div><div><small>내 점심 가능 시간</small><strong id="lunch-window-stat">70<span>분</span></strong></div><div class="stats-spark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        </section>
+
+        <div class="mode-switch" role="tablist" aria-label="식사 방식">
+          <button class="mode-tab selected" id="solo-tab" role="tab" aria-selected="true" type="button"><span>◉</span> 혼자 먹어요</button>
+          <button class="mode-tab" id="group-tab" role="tab" aria-selected="false" type="button"><span>♧</span> 함께 주문해요 <span class="new-tag">NEW</span></button>
+        </div>
+
+        <section class="preferences-panel" aria-label="점심 조건">
+          <div class="preference-heading"><div><span class="step-label">YOUR LUNCH, YOUR WAY</span><h2>오늘의 조건</h2></div><button id="reset-button" class="text-button" type="button">초기화 <span>↺</span></button></div>
+          <form id="preferences-form">
+            <div class="pref-grid">
+              <label class="input-card"><span class="input-icon time-icon">◷</span><span class="input-copy"><span class="input-label">사용 가능 시간</span><span class="input-control"><input id="time-value" type="number" min="20" max="180" step="5" value="70" aria-label="사용 가능 시간 분"><span>분</span></span></span><span class="input-chevron">⌄</span></label>
+              <label class="input-card"><span class="input-icon budget-icon">₩</span><span class="input-copy"><span class="input-label">1인 예산</span><span class="input-control"><input id="budget-value" type="number" min="5000" max="50000" step="1000" value="12000" aria-label="1인 예산 원"><span>원 이하</span></span></span><span class="input-chevron">⌄</span></label>
+            </div>
+            <div class="preference-bottom"><div class="priority-area"><span class="input-label">오늘은 이게 중요해요</span><div class="chips" role="group" aria-label="추천 우선순위"><button class="chip active" type="button" data-priority="fast">⚡ 빠르게</button><button class="chip" type="button" data-priority="filling">◉ 든든하게</button><button class="chip" type="button" data-priority="healthy">✳ 가볍게</button><button class="chip" type="button" data-priority="cheap">₩ 가성비</button></div></div><button class="find-button" type="submit"><span>오늘 메뉴 찾기</span><b>→</b></button></div>
+          </form>
+          <div class="group-inline" id="group-inline" hidden><div><strong>동료들과 메뉴를 모아볼까요?</strong><span>각자 고르면 주문 목록과 정산을 한 번에 정리해요.</span></div><button id="create-group" type="button">주문방 만들기 <span>→</span></button></div>
+        </section>
+
+        <section class="discovery-tools" aria-label="메뉴 탐색">
+          <label class="search-box"><span>⌕</span><input id="menu-search" type="search" placeholder="메뉴, 식당, 음식 종류 검색" aria-label="메뉴, 식당, 음식 종류 검색"><kbd>Ctrl K</kbd></label>
+          <div class="discovery-heading"><strong>점심 상황별로 찾아보기</strong><span>빠르게 골라보세요</span></div>
+          <div class="discovery-chips" role="group" aria-label="빠른 탐색"><button type="button" data-quick="under10000"><span>₩</span> 1만원 이하</button><button type="button" data-quick="quick"><span>ϟ</span> 45분 안에</button><button type="button" data-quick="pickup"><span>↗</span> 포장·픽업</button><button type="button" data-quick="clear">초기화</button></div>
+          <div class="category-row" role="group" aria-label="음식 종류"><button class="category-pill active" type="button" data-category="all">전체 <span class="category-count">6</span></button><button class="category-pill" type="button" data-category="한식">한식 <span class="category-count">0</span></button><button class="category-pill" type="button" data-category="일식">일식 <span class="category-count">0</span></button><button class="category-pill" type="button" data-category="샐러드">샐러드·건강식 <span class="category-count">0</span></button><button class="category-pill" type="button" data-category="카레">아시안 <span class="category-count">0</span></button></div>
+          <div class="filter-toolbar" aria-label="상세 필터">
+            <label class="filter-select"><span>가격</span><select id="price-filter" aria-label="가격 필터"><option value="all">전체</option><option value="under7000">7천원 이하</option><option value="7000-10000">7천~1만원</option><option value="10000-15000">1만~1.5만원</option><option value="over15000">1.5만원 이상</option></select></label>
+            <label class="filter-select"><span>대기</span><select id="wait-filter" aria-label="대기시간 필터"><option value="all">전체</option><option value="5">5분 이내</option><option value="10">10분 이내</option><option value="20">20분 이내</option></select></label>
+            <button class="solo-filter" id="solo-filter" type="button" aria-pressed="false">☑ 혼밥 가능</button>
+            <div class="view-switch" role="group" aria-label="결과 보기 방식"><button type="button" class="view-button active" data-view="list" aria-pressed="true">목록</button><button type="button" class="view-button" data-view="map" aria-pressed="false">지도</button></div>
+          </div>
+        </section>
+
+        <section class="recommendations" id="recommendations">
+          <div class="results-heading"><div><div class="results-eyebrow"><span class="results-dot"></span> 샘플 데이터 · 예상 기준</div><h2>조건에 맞는 메뉴 후보 <span class="result-count" id="result-count">4</span></h2></div><label class="sort-control"><span>정렬</span><select id="sort-select" aria-label="정렬 방식"><option value="recommend">추천순</option><option value="distance">가까운 순</option><option value="rating">평점 높은 순</option><option value="wait">대기 짧은 순</option><option value="price">가격 낮은 순</option></select></label></div>
+          <div id="result-notice" class="result-notice" aria-live="polite"></div>
+          <div id="map-preview" class="map-preview" hidden><div class="map-preview-head"><span><strong>주변 식당 지도</strong><small>샘플 위치 미리보기 · 실제 지도/현재 위치 아님</small></span><span class="map-legend">● 선택 가능 식당</span></div><div class="sample-map" id="sample-map" aria-label="식당 샘플 위치 지도"></div></div>
+          <div id="restaurant-list" class="restaurant-list"></div>
+          <div id="empty-state" class="empty-state" hidden><div>⌕</div><h3>조건에 맞는 메뉴를 찾지 못했어요</h3><p>사용 가능 시간을 늘리거나 예산을 조정해 보세요.</p><button id="relax-button" type="button">조건 조금 완화하기 <span>→</span></button></div>
+          <div class="data-note"><span>ⓘ</span> 거리·평점·리뷰·대기·가격 및 지도 위치는 UX 미리보기용 샘플이에요. 실시간 매장 정보, 현재 위치 또는 예약 가능 여부가 아닙니다.</div>
+        </section>
+        <footer class="page-footer">LunchFit <span>·</span> 점심 고민을 줄이는 작은 습관 <span class="footer-right">MVP 미리보기</span></footer>
+      </main>
+
+      <button class="mobile-basket" id="mobile-basket" type="button" aria-expanded="false" aria-controls="group"><span class="mobile-basket-icon">＋</span><span class="mobile-basket-copy"><strong id="mobile-basket-title">메뉴를 담아보세요</strong><small id="mobile-basket-count">선택 메뉴 0개</small></span><strong class="mobile-basket-total" id="mobile-basket-total">목록 보기 <span>↑</span></strong></button>
+      <div class="sheet-backdrop" id="sheet-backdrop" hidden></div>
+      <aside class="detail-rail" id="group">
+        <div class="rail-top"><span class="rail-kicker">YOUR LUNCH, AT A GLANCE</span><button class="rail-close" type="button" aria-label="패널 닫기">×</button></div>
+        <div class="time-card"><div class="time-card-top"><span class="time-card-icon">◷</span><span>점심시간 미리보기</span><span class="live-pill"><i></i> 계산 중</span></div><div class="time-line"><div class="time-stop"><span class="stop-dot start"></span><div><small>출발</small><strong>12:10</strong></div></div><div class="line-segment"><span>70분</span></div><div class="time-stop"><span class="stop-dot end"></span><div><small>복귀 예정</small><strong>13:20</strong></div></div></div><div class="time-card-foot"><span>점심 여유 시간</span><strong>1시간 10분</strong></div></div>
+        <div class="rail-section selected-section"><div class="rail-section-heading"><div><h3>내가 고른 메뉴</h3><small class="reorder-hint">≡ 손잡이를 길게 눌러 순서를 바꿔요</small></div><span class="selection-count" id="selection-count">0</span></div><div id="selected-menu" class="selected-menu empty-selection"><div class="selection-empty-icon">＋</div><div><strong>아직 메뉴를 고르지 않았어요</strong><span>추천 메뉴에서 마음에 드는 메뉴를 담아보세요.</span></div></div><span class="sr-only" id="selection-announcement" aria-live="polite"></span></div>
+        <div class="settlement-card"><div class="settlement-heading"><span class="settlement-icon">₩</span><div><small>예상 점심 비용</small><strong id="estimated-cost">₩ 0</strong></div></div><div class="settlement-divider"></div><div class="settlement-row"><span>내 예산</span><strong id="rail-budget">₩ 12,000</strong></div><div class="budget-track"><span id="budget-track-fill"></span></div><div class="budget-caption"><span id="budget-caption">메뉴를 담으면 예산을 계산해요</span><span id="budget-percent">0%</span></div></div>
+        <div class="rail-recommendation"><div class="rail-rec-icon">✳</div><div><strong>LunchFit 한마디</strong><p id="rail-tip">조건에 맞는 메뉴를 골라 시간을 아껴보세요!</p></div></div>
+        <button class="rail-cta" id="continue-button" type="button" disabled>메뉴를 먼저 골라주세요 <span>→</span></button>
+        <div class="rail-bottom-note"><span>◈</span> 예약·주문은 아직 연결되지 않았어요</div>
+      </aside>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <dialog id="group-dialog" class="group-dialog"><form method="dialog"><button class="dialog-close" aria-label="닫기">×</button></form><div class="dialog-mark">♧</div><span class="step-label">LUNCH TOGETHER</span><h2>점심 주문방 만들기</h2><p>동료들이 메뉴를 고르면 한눈에 모아보고 정산할 수 있어요.</p><label class="dialog-label" for="group-name">주문방 이름</label><input class="dialog-input" id="group-name" value="오늘 점심 주문" maxlength="30"/><label class="dialog-label" for="group-members">예상 참여 인원</label><select class="dialog-input" id="group-members"><option value="2">2명</option><option value="3" selected>3명</option><option value="4">4명</option><option value="5">5명</option><option value="6">6명</option></select><button class="dialog-create" id="dialog-create" type="button">주문방 만들기 <span>→</span></button><small class="dialog-footnote">샘플 모드에서는 주문방이 이 기기에만 저장돼요.</small></dialog>
+  </body>
+</html>
